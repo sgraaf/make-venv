@@ -1,0 +1,107 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "make-venv"
+authors = [{name = "Steven van de Graaf", email = "steven@vandegraaf.xyz"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = []
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+]
+requires-python = "~=3.8"
+dependencies = [
+    "click",
+]
+dynamic = ["version", "description"]
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+]
+docs = [
+    "furo",
+    "myst-parser",
+    "sphinx",
+    "sphinx-autobuild",
+    "sphinx-copybutton",
+    "sphinxext-opengraph",
+]
+dev = [
+    "make-venv[tests,docs]",
+]
+
+[project.urls]
+Documentation = "https://make-venv.readthedocs.io/en/stable/"
+Changelog = "https://make-venv.readthedocs.io/en/stable/changelog.html"
+"Source Code" = "https://github.com/sgraaf/make-venv"
+"Issue Tracker" = "https://github.com/sgraaf/make-venv/issues"
+
+[project.scripts]
+make-venv = "make_venv.cli:cli"
+
+[tool.ruff]
+select = ["ALL"]
+ignore = [
+    "E501",  # line too long, handled by black (pycodestyle)
+    "ANN002",  # missing-type-args (flake8-annotations)
+    "ANN003",  # missing-type-kwargs (flake8-annotations)
+    "ANN101",  # missing-type-self (flake8-annotations)
+    "ANN102",  # missing-type-cls (flake8-annotations)
+    "ANN401",  # any-type (flake8-annotations)
+    "COM",  # flake8-commas, handled by black
+    "CPY",  # flake8-copyright
+    "ISC001",  # single-line-implicit-string-concatenation (flake8-implicit-str-concat)
+    "INP",  # flake8-no-pep420
+]
+src = ["src", "tests", "docs"]
+target-version = "py38"  # the minimum Python version supported, used by pyupgrade
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = [
+    "F401",  # unused-import (Pyflakes)
+]
+"noxfile.py" = [
+    "D100",  # undocumented-public-module (pydocstyle)
+    "ERA001",  # commented-out-code (eradicate)
+]
+"docs/conf.py" = [
+    "A001",  # builtin-variable-shadowing (flake8-builtins)
+]
+"src/make_venv/cli.py" = [
+    "A001",  # builtin-variable-shadowing (flake8-builtins)
+    "A002",  # builtin-argument-shadowing (flake8-builtins)
+]
+"tests/**/test_*.py" = [
+    "D",  # pydocstyle
+    "ANN201",  # missing-return-type-undocumented-public-function (flake8-annotations)
+    "S101",   # assert (flake8-bandit)
+    "SIM300",   # yoda-conditions (flake8-simplify)
+    "PLR2004",   # magic-value-comparison (Pylint)
+]
+
+
+
+[tool.ruff.isort]
+known-first-party = [
+  "make-venv",
+  "tests",
+]
+lines-between-types = 0
+
+[tool.ruff.pydocstyle]
+convention = "google"
