@@ -16,5 +16,5 @@
     "package_name": "make_venv",
     "short_description": "A command-line utility for making a Python virtual environment.",
     "use_rich": false,
-    "version": "2024.03.0"
+    "version": "2024.3.0"
 }

@@ -70,6 +70,7 @@ Options:
   -n, --kernel-name NAME        The display name of the iPython kernel, if applicable.
                                 [default: Python <version> (<name-of-parent-directory-
                                 of-virtual-environment>)]
+  -v, --version                 Show the version and exit.
   -h, --help                    Show this message and exit.
 ```
 
